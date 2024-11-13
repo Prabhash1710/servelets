@@ -1,0 +1,128 @@
+JSP (Java Server Page):
+-----------------------------
+-> JSP is an improved extended version of Servlet technology.
+
+-> Java Server Pages (JSP) is a technology that allows developers to create dynamic 
+   web pages using a combination of HTML, XML, and Java code (or)
+   it is a technology which is used for developing dynamic web pages which helps 
+   developers insert java code in HTML pages by making use of special JSP tags.
+
+-> Using JSP, you can collect input from users through web page forms & also 
+   existing records from a database or another source, and create web pages 
+   dynamically. 
+
+-> JSP pages are executed on a web server, and the resulting output is sent to the 
+   client's web browser. 
+
+-> JSP is part of the Java EE platform and is supported by most web servers and
+ servlet containers.
+
+
+Advantages of JSP:
+----------------- 
+-> It is more convenient to write (and to modify!) regular HTML than to 
+   have plenty of println statements that generate the HTML. (against servlet)
+
+-> JSP allows developers to follow the Model-View-Controller (MVC) design
+   pattern, which separates a web application's presentation, logic, and data. 
+   This makes it easier to create scalable and maintainable web applications. 
+   (same as servlet)
+
+-> Provides good security features like session tracking, user authentication, 
+    and access restriction. (same as servlet)
+
+Difference between JSP and servlets:
+-----------------------------------
+-> JSP pages allow web designers to work with HTML or XML markup, while Servlets require a deeper understanding of Java.
+
+-> Servlets are Java classes that run on the server side and handle requests and responses,
+   while JSP are text files that contain HTML, Java code, and JSP tags and are compiled into servlets by the web container.
+
+-> Servlets are written in pure Java, while JSP can mix HTML and Java code.
+
+-> Servlets are faster than JSP, because JSP need to be translated and compiled into servlets before execution.
+
+-> Servlets can handle any type of requests, such as HTTP, FTP (File Transfer Protocol), or SMTP (Simple Mail Transfer Protocol), while JSP 
+   can only handle HTTP requests.
+
+-> Servlets are more suitable for complex business logic and data processing, while JSP are more suitable for presentation and user interface.
+
+-> Servlets can be used as controllers in the MVC pattern, while JSP can be used as views.
+
+LifeCycle of JSP:
+-----------------
+
+The life cycle of a JSP page is the process that starts with its creation and ends with its destruction. The life cycle of a JSP page consists of the following phases:
+
+-> Translation: The JSP page is translated into a Java servlet by the JSP engine. This phase checks the syntax and the structure of the JSP page and    generates the corresponding Java code.
+
+-> Compilation: The translated servlet is compiled into a class file by the Java compiler. This phase ensures that the servlet is valid and executable.
+
+-> Class loading: The compiled servlet class is loaded into the memory by the class loader. This phase makes the servlet available for processing requests.
+
+-> Instantiation: An instance of the servlet class is created by the JSP engine. This phase initializes the servlet object and its fields.
+
+-> Initialization: The jspInit() method of the servlet is invoked by the JSP engine. This phase performs any initialization tasks that are required for the 
+   servlet, such as opening database connections or reading configuration files.
+
+-> Request processing: The _jspService() method of the servlet is invoked by the JSP engine for each request that is sent to the JSP page. This phase 
+   handles the request and generates the response by executing the Java code and the JSP tags in the page.
+
+-> Destruction: The jspDestroy() method of the servlet is invoked by the JSP engine when the servlet is no longer needed or the web application is shut 
+   down. This phase performs any cleanup tasks that are required for the servlet, such as closing database connections or releasing resources.
+
+
+JSP tags
+--------
+
+1.Scriptlet tag:
+ used to write java code.
+
+<%  %>
+
+2.Expression tag
+ used to print the values
+
+<%= %>
+
+3.Declaration tag
+ used to declare the members
+
+<%!  %>
+
+4.Directives tag
+ to import the packages and define error-handling pages or the session information of the JSP page.
+
+<%@  %>
+
+5. comment tag
+ JSP comment marks to text or statements that the JSP container should ignore. A JSP comment is useful when you want to hide or "comment out", a part of 
+ your JSP page.
+
+<%-- jsp comment --%>
+
+
+LifeCycle of Servlet:
+---------------------
+
+The life cycle of a servlet is the process that describes how the servlet container manages the servlet from its creation to its destruction. The life cycle of a servlet consists of the following phases:
+
+-> Loading: The servlet container loads the servlet class into the memory when the first request for the servlet is received. The servlet class is loaded  
+   only once in the life cycle.
+
+-> Instantiation: The servlet container creates an instance of the servlet class by invoking its no-argument constructor. The servlet instance is created
+   only once in the life cycle.
+
+-> Initialization: The servlet container calls the init() method of the servlet instance to perform any initialization tasks, such as opening database connections or reading configuration files. The init() method is called only once in the life cycle.
+
+-> Service: The servlet container calls the service() method of the servlet instance for each request that is sent to the servlet. The service() method
+  handles the request and generates the response by executing the Java code and the JSP tags in the servlet. The service() method is called repeatedly in 
+  the life cycle.
+
+-> Destruction: The servlet container calls the destroy() method of the servlet instance when the servlet is no longer needed or the web application is shut
+   down. The destroy() method performs any cleanup tasks, such as closing database connections or releasing resources. The destroy() method is called only
+   once in the life cycle.
+
+
+
+

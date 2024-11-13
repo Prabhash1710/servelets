@@ -1,0 +1,322 @@
+servlets notes:
+
+Applets
+--------
+->Applet was first used for developing java web app
+->when client/browser sents a request, in server respective files will be downloaded after that response is sent 
+ back to client(late response). 
+
+CGI(common gateway interface)
+-----------------------------
+->for every client request new process will be created, it consumes cpu memory & performance will become slower.
+->it uses c language & it is platform dependent.
+
+servlet
+--------
+for every client request thread will be created, once response is sent back it will be destroyed. 
+server side component, resides on server side and gives dynamic web pages.
+
+What is servlet?
+
+->servlet are discrete(individual/seperate) java classes which 
+  reside into the container of web server which follows
+ "component architecture" and "request-response model".
+
+->Servlet means “Server-side component”.
+
+->Servlet are the server side programs that run on a web server or     application server and acts as a middle layer between 
+requests coming from web browser and databases of application server.
+
+->Servlet technology is robust and scalable because of java language.
+
+->Servlet is a technology which is used to create a web application.
+
+->Servlet is an API that provides many interfaces and classes.
+
+->Servlet is an interface that must be implemented for creating any    Servlet.
+
+->Servlet is a class that extends the capabilities of the servers and responds to the incoming requests. It can respond to any requests.
+
+->Servlet is a web component that is deployed on the server to create a dynamic web page.
+
+Diagram:
+-------
+
+note:
+Web server-apache
+web container-tomcat
+servlets 
+
+->when client/browser sends request to web server, 
+->if client is asking for static page, web server (apache) sends a response.
+  else if it is dynamic page, apache sends request to container (tomcat) which consists of servlets.
+
+servlet life cycle:
+-------------------
+->container will create an object of Http Request & Http Response.
+->loads .class file
+->calls default constructor
+->calls init() method
+->creates thread on servlet, now that particular servlet is having its own thread
+->on that thread it will call service() method
+->in that service method it will pass the request & response object it has created in the very first step 
+->once the request arrive at that particular thread, request will be 
+processed & response will be created, response will go back to container in turn to webserver in turn to client.
+->once service method is executed, destroy() method is called & request response objects are destroyed. 
+ (since thread is virtual it is not deleted, whenever client is sending same request again, same thread will be used)
+
+Web container / Servlet Container / Deployment Descriptor 
+----------------------------------------------------------
+->A web container is the component of a web server that interacts with 
+  the java servlet.
+->A web container manages the life cycle of servlets and it maps a URL to
+  a particular servlet while ensuring that the requester has relevant 
+  access rights.
+->Java servlet do not have main method, so a container is required to 
+  load them. The servlet gets deployed on the web container.
+
+Ways of Creating a Servlet Class
+
+1. Implementing Servlet Interface.
+2. Extending GenericServlet.
+3. Extending HTTPServlet
+
+1. Servlet is an interface in javax.servlet package.
+   It has 5 abstract methods.
+   init()
+   service()
+   destroy()
+   getServletinfo()
+   getServletConfig()
+
+   You can create a servlet by implementing the Servlet interface and providing the implementation for all these methods.
+
+2. Generic Servlet is an abstract class in javax.servlet package.
+   
+   Generic servlet implements Servlet, ServletConfig and Serializable interfaces. It provides the implementation of all the methods of these interfaces 
+   except the service method.
+
+   GenericServlet class can handle any type of request so it is protocol-independent.
+
+   You can create a servlet by inheriting the GenericServlet class and providing the implementation of the service method.
+
+
+
+
+3. HTTP Servlet is an abstract class in javax.servlet.http package.
+
+   The HttpServlet class extends the GenericServlet class and implements Serializable interface. 
+
+   It provides http specific methods such as doGet, doPost, doHead, doTrace etc.
+
+   It is an abstract class with no abstract methods.
+
+   A subclass of HttpServlet must override at least one method, usually one of these:
+
+   -> doGet , if the servlet supports HTTP GET requests. Used in the case of fetching data.
+   -> doPost , for HTTP POST requests. Used in the case of inserting data or sending data.
+   -> doPut , for HTTP PUT requests. Used in the case of doing update operations.
+   -> doDelete , for HTTP DELETE requests. Used when we want to perform delete operation.
+
+Difference between RequestDispatcher and sendRedirect
+---------------------------------------------------------------------
+->RD is used to pass the request to another 
+  resource for further processing "within the same server", 
+  another resource could be any servlet, jsp page or any 
+  kind of file where in SRD is used to redirect client request 
+  to some other location for further processing, the new location 
+  is available on "different server or different context".
+
+->In RD the process of transferring the request is taken care by
+  web container without the client/browser being informed where in SRD 
+  Our web container handle’s this and transfer the request using browser,
+  and this request is visible in browser as a new request. 
+
+->RD is called as server-side Redirect where in SRD is called as
+  client-side redirect.
+
+->RequestDispatcher forward() is used to forward the 
+  same request to another resource where in, in sendRedirect(), 
+  web application returns the response to client with status code 
+  302 (redirect) with URL to send the request. The request sent is
+  a completely new request.
+
+->RequestDispatcher forward() is handled internally by 
+  the web container where in sendRedirect() is handled by browser.
+
+->In forward(), browser is unaware of the actual processing resource 
+  and the URL in address bar remains same where in sendRedirect() URL 
+  in address bar change to the forwarded resource.
+
+->RD is faster than SRD.
+
+
+Session Tracking:
+-----------------
+
+->Session tracking is a way to maintain state of an user.
+  It is also known as session management in servlet.
+
+->Session tracking is mechanism of tracking the client provided data and   making it availableto the next request from the same client. And this process is continued until the user choose to logout or terminate the session.
+
+->Http Protocol is a stateless, so we need to maintain state using session tracking techniques.Each time user requests to the server, server treats the request as new request, so we need to maintain the state of an user to recognize the particular user.
+
+->Session tracking is a mechanism that servlets use to maintain state about 
+a series of requests from the same user (that is request originating from 
+the same browser) across some period of time.
+
+Note: Http is stateless that means each request is considered as the new request. 
+
+We can track the session in four ways
+
+1. HttpSession
+2. Cookies
+3. URL rewriting
+4. Hidden form/fields.
+
+HttpSession
+-----------
+-> In HttpSession Session Tracking Mechanism, we will create a separate HttpSession object for each and every user,at each and every request we will pick up the request parameters from the request object and we will store 
+them in the respective HttpSession object for the sale of future reusability.
+
+-> To get HttpSession object if we use getSession() method, then container will check whether any HttpSession object existed for the respective user or not, if any HttpSession object is existed then container will return the existed HttpSession object reference. 
+
+-> If no object is existed for the respective user, then container will create
+ a new HttpSession object and return its reference. 
+
+HttpSession Methods
+-------------------
+
+1. public void invalidate(): To destroy the HttpSession object we will use this method.
+
+2. public void setMaxInactiveInterval(int time): If we want to destroy the HttpSession object 
+   after a particularly ideal time duration then we have to use this method.
+
+3. public void setAttribute(String name, Object value): To set an attribute 
+on to the HttpSession object we have to use this method.
+
+4. public Object getAttribute(String name): To get a particular attribute value from the HttpSession object we have to use this method.
+
+5. public void removeAttribute(String name): To remove an attribute from the HttpSession object we have to use the following method.
+
+Advantages of HttpSession Session Tracking
+------------------------------------------
+1. There are no restrictions on the size of the object, any kind of object can be stored in a session.
+2. The usage of the session is not dependent on the client’s browser.
+3. It is secure and transparent.
+
+Disadvantages of HttpSession Session Tracking
+---------------------------------------------
+1. We will create a HttpSession object for each and every user, where if we increase the number of users then automatically the number of HttpSession objects will be created at the server machine, it will reduce the 
+overall performance of the web application.
+2. We are able to identify user-specific HttpSession objects among multiple numbers of HttpSession objects by carrying Session-Id value from client to server and from server to client.
+
+
+
+Cookies
+-------
+
+-> Cookies are the mostly used technology for session tracking. Cookie is key value pair of information,
+   sent by the server to the browser.This should be saved by the browser its space in the client computer.
+
+-> Session tracking is easy to implement and maintain using the cookies.
+
+-> Disadvantage is user can disable cookies in their browser, in such case the browser will not save the 
+   cookie at client computer and session tracking fails.
+
+-> Cookies are the small files which are stored on user's computer. They are designed to hold a modest amount
+   of data specific to a particular client and website.
+
+-> javax.servlet.http.Cookie class provides the functionality of using cookies.it provides a lot of useful 
+   methods for cookies like setName,setMaxAge, setPath, setValue etc.,
+
+-> creates a cookie, a small amount of information sent by a servlet to web browser,saved by the browser, and 
+   later sent back to the server. A cookies value can uniquely identify a client , so cookies are commonly used 
+   for session management. 
+
+-> A cookies has a name,a single value and optional attributes such as comment, path and domain qualifiers,
+   maximum age and a version number
+
+-> Servlets sends cookies to the browser by using the HttpServletResponse #resp.addcookie() method, which adds fields to
+   HttpResponse headers to send cookies to the browser, one at a time.
+
+-> the browser returns cookies to the servlet by adding fields to HTTP request headers.Cookies can be retrieved   
+   from a request by using the HttpServletRequest #req.getCookies() method. several cookies might have the same name but 
+   different path attributes.       
+
+Url rewriting
+-------------
+-> When a request is made, additional parameter is appended with the url. In general, added additional parameter will 
+   be session_id or sometimes the user_id. It will suffice to track the session. 
+
+-> This type of session tracking doesn’t need any special support from the browser. 
+
+-> Disadvantage is, implementing this type of session tracking is tedious. We need to 
+   keep track of the parameter as a chain link until the conversation completes and also 
+   should make sure that, the parameter doesn’t clash with other application parameters.
+
+Hidden Form Field
+-----------------
+<INPUT TYPE=” hidden” NAME=” technology” VALUE=” servlet”>
+
+-> Hidden fields like the above can be inserted in the webpages and information can be sent to the server for session 
+   tracking.
+
+-> These fields are not visible directly to the user, but can be viewed using view source option from the 
+   browsers. This type doesn’t need any special configuration from the browser of server and by default available 
+   to use for session tracking. 
+
+-> This cannot be used for session tracking when the conversation included static resources like 
+   html pages.
+
+   
+Assignment:
+-----------
+
+1. Difference between ServletConfig and ServletContext with example.
+2. Difference between doGet() & doPost() method.
+3. Difference between forward() and include().
+4. Difference between sendRedirect() and forward().
+5. Difference between Servlet, GenericServlet & HttpServlet.
+6. Difference between HttpSession and cookies.
+7. Explain Servlet Architecture.
+
+Difference between ServletConfig and ServletContext.
+---------------------------------------------------
+
+-> ServletConfig is servlet specific   
+   wherein ServletContext is for whole application.
+
+-> Parameters of servletConfig are present as name-value pair in <init-param> inside <servlet>
+   wherein Parameters of servletContext are present as name-value pair in <context-param> which is outside of <servlet> and inside <web-app>
+
+-> ServletConfig object is obtained by getServletConfig() method (getServletConfig().getInitParameter(“name”))
+   wherein ServletContext object is obtained by getServletContext() method (getServletContext().getInitParameter(“name”))
+
+-> Each servlet has got its own ServletConfig object
+   wherein ServletContext object is only one and used by different servlets of the application.
+
+-> Use ServletConfig when only one servlet needs information shared by it 
+   wherein Use ServletContext when whole application needs information shared by it.
+
+Difference between doGet() & doPost()
+-----------------------------------------------------
+-> doGet() is used to handle HTTP GET requests, which are typically used to retrieve data 
+    from a server wherein doPost() is used to handle HTTP POST requests, which are typically
+    used to send data to server.
+-> GET requests send data as part of the URL query string, which means that the data is visible 
+   to the user and can be bookmarked  or cached by the browser wherein POST requests send data 
+   in the message body of the request, which means that the data is not visible 
+   to the user and cannot be bookmarked or cached by the browser.
+-> doGet() method receives this data as a query string and can use it to generate a response
+   wherein doPost() method receives this data as part of the request body and can use it to 
+   generate a response.
+-> doGet() is less secure wherein doPost is more secure
+-> In case of doGet(), upon refreshing the page we do not get any security popup alert
+   wherein in doPost(), upon refreshing the page we get security popup alert to avoid duplicate 
+   transaction.
+ 
+
+
+
+
