@@ -1,0 +1,285 @@
+Real Time (company):
+-------------------
+what is Server
+--------------
+definition: Server is a combination of hardware and software.
+
+Developement Server/Environment:
+--------------------------------
+definition: Developement server is a combination of hardware and software which is mainly
+            used to store the code written by the developer
+
+Testing Server/ Test Bed
+------------------------
+definition: Testing server is a combination of hardware and software which is mainly used 
+            to install the build/SW which needs to be tested.
+
+Production Server:
+-------------------
+defintion: Production Server is a combination of hardware and software which is present in
+           the customers place where in customers will use the sw and run the business.
+
+1st cycle (5days)
+-----------------
+All developers will write the code for module 'A'and do WBT ,later sr dev/ DL will collect
+the code , compile the code and compress the code into ZIP format/File and store the file
+in developemet server in the below mentioned path
+
+D://Build/B01.Zip
+
+DL will send a mail to 'TL' stating Build B01.zip is ready for testing it consist of code
+for module 'A' and wbt testing is done. 'TL' will connect to REX server and copy paste the
+buildb01.zip into testing server, unzip and install the build/sw and give url,un and pwd to
+test engineers and also TL will assign features to test engineers and ask them to start the
+testing.Every TE will start doing functional testing for module 'A' and while testing if 
+they find any defect they will loginto DTT and prepare defect report and give unique defect 
+id and communicate defect to 'DL' and 'DL' will assign defect to respective developer.
+parallely developers will be
+1) copying old code
+2) write code new module 'B'
+3) Fix some 60 defect in module 'A'
+4) WBT 
+
+DL/Sr dev will collect the code , compile the code and compress the code into zip file and
+store the file into 'REX' server and 'DL' will send a mail to 'TL' stating BuildB02.zip 
+is ready for testing
+
+2nd test cycle ( 5 days)
+-------------------------
+TL will connect to 'REX' server and copy paste Build B02.zip into 'testing server', unzip 
+and uninstall the old build/sw and install the new build/sw and assign features to TE and
+ask them to start the testing and TE will 
+1) FT for module B
+2) Integration testing between B and A
+3) Retest defects in the module A
+4) Test the old module 'A'
+
+Note:
+------
+1) while retesting defect test engineer should retest the defect found by him not worry about 
+   the defect found by other TE.
+
+2) why TE will find new defects while testing old modules?
+
+- Chances are the developers adding new module might affect old modules.
+- Chances are there developers fixing defects in old modules might introduce new defects 
+  in same old module
+- Chances are there TE might have missed some defects in the previous cycle.
+
+Like this way testing continues for many cycles and assume that minimum bunch of modules
+are ready this is when testing team will talk to production team and get testing server 
+similar to production server setup available . In this server test engineers will mainly 
+focus on doing system testing
+
+when to go for system testing:(*)
+------------------------------
+1) when minimum bunch of modules are ready.
+2) Basic functionalities of all the modules should be working fine (FT and IT)
+3) Product/sw should be relativly stable (No blocker defects)
+4) Testing server similar to production server setup should be available.
+5) when we start getting less number of requirements.
+
+Assume that we are in 26th cycle and testing continues till 55th cycle:
+----------------------------------------------------------------------
+Assume that we got module 'Q' and testing team will start to test module 'Q'
+
+1) TE will do 'FT' for 'Q'
+2) Integration testing between 'Q' with old modules.
+3) System testing (A-Q)
+4) Retest defects in old modules.
+5) Test the old modules (A-P)
+
+Like this way testing continues for many cycles and assume that we got module 'Z' in the 
+50th cycle Now TE will test module 'Z' .Once after testing is completed for 'A-Z' modules. 
+last 4-5 cycles requirements will be freezed developers will be fixing pending defects 
+and TE will be testing the defects , at the end moment again TE will do FT,IT,ST 
+for all (A-Z) modules and TE got to know sw quality is good , now testing team will talk 
+to Test manager,Dev manager and PM stating sw quality is good , Finally sw will be 
+deployed into the production server, so that customers can use sw and run the business. 
+This is how system  testing works in the real time.
+
+What is Release or 1st release
+----------------------------------------
+defintion:
+
+Starting from gathering/collecting the requirements followed by developing the sw and
+testing sw for many cycles and deploy the sw into the production server is called as 
+'Release/1 Release'.
+
+Note:
+-----
+1) If project is very big and complex in this case one project can hve multiple releases.
+2) If project is very small and simple in this case one project can have one release.
+
+When to release sw to customer?
+1) when all the customer requested features are ready (A-Z)
+2) when the product is functionally stable (good quality)
+3) There should not be any Blocker/Critical defects.
+4) Once after FT,IT and ST is done we can release sw to customer.
+5) Once after sw is tested in Testing server similar  to the production Server.
+6) Once after all the end to end scenarios are thoroughly tested.
+7) when we are about to meet Deadline/release date given by the customer.
+8) We can have some minor defects and these defects should not affect the 
+  customer business workflows and this defects should be meet acceptable limit 
+  set by the customer.
+
+
+What do you mean by Testing server SIMILAR to Production server 
+---------------------------------------------------------------
+1) Hardware should be similar to the production server:
+-------------------------------------------------------
+a)manufacturer should be similar to Production Server
+  If production server is manufactured by HP then Testing server similar to
+  production server should be manufactured by HP only.
+
+b)Configuration and make should be similar but we can have diffferent capacity..
+  It means No of cpu and storage can be different
+
+2)Software should be similar to the production server:
+------------------------------------------------------
+a) 'OS'should be similar
+b) 'webserver' should be similar
+c) 'App Server' Should be similar
+d) 'DB Server' should be similar
+
+3)Data should be similar to the production server:
+--------------------------------------------------
+Suppose if production server is having 10lakh/50,000 user accounts (Data) then in
+testing server similar to production server Testing team should create
+10lakh/50,000(data) similar dummy accounts (data) and test the sw.
+
+Creating 10lakh/50,000 Dummy data manually is verytough job thats is the reason company 
+will use performance testing tool to create huge data.
+
+
+->what is Build
+--------------------
+We (Developers) will write the code, do wbt and compile the code and compress the code
+into a file ,this compressed file is called as 'Build'.
+We give the Build in below mentioned formats:
+.exe
+.zip
+.jar (java archieve)
+.war (web application acrchieve)
+.tar (tap archieve)
+.rar (roshal archieve)
+.apk (android programming/packaging kit)
+.ipa (IOS app archieve)
+
+Note:
+-----
+- one project can consist of n number of builds.
+- One project can have only 1 release ( if it is small and simple)
+- one project can have n number of releases ( if it is big and complex project)
+- Every release can have n number of builds.
+
+
+
+
+->Re-spin/Unplanned Build
+-------------------------
+The process of getting a new build within the test cycle is called as 'Respin' It's also called as 'Unplanned Build'.
+Note: One release can consist of n no of Re-spin.
+
+Diagram for Re-Spin:
+---------------------
+ 
+Real time example for Respin:
+-----------------------------
+If you take gmail as an application, if Login module itself is not working then TE cannot continue the testing , In this case Developer will give 'Respin'.
+
+->Patch:
+--------
+->Patch is the piece of software which consist of modified programmes.
+
+->To install the patch it's not required to uninstall the build.
+
+Diagram for patch
+-----------------
+
+Real time examples for patch:
+------------------------------
+Example: Whatsapp update,FB update, Phonepay update,etc....
+
+Note:
+-----
+- Many lines of code problem means -->Respin
+- Piece of code problem means---> Patch
+- One Release can consist of n no of patch
+
+-> CR (Change Request)
+----------------------
+when customer given requirements are not clear then immediatly customer will request for
+company that he wants to change the requirement. This changed requirement is called as 
+'CR'.
+
+CR will be given before software is released to the customer.
+
+-> RFE(Request for Enhancement)
+-------------------------------
+If TE finds a defect in the software and this defect is not part of the requirement then 
+developer will tell it is an 'RFE'.
+
+RFE can given by Customer,Sr TE, Sr Dev, BA and PM.
+
+
+->HOT FIX/Incident(defect)management:
+-------------------------------------
+In the production server while using software and running business if customer finds 
+any 'Blocker/Critical' defect then customer will immediatly communicate defect to the
+company and in the company developers will immediatly fix the defect and TE will
+immediatly test the defect and Patch will be given to the production server. 
+This process is called 'Hot Fix'/'Incident Management'.
+
+To work on the Hotfix max we will be having 1 or 2 hours , worst case 1 day time.
+
+Short Release/Interim Release:
+------------------------------
+In production server while using sw and running business, if customer feels that he
+wants to do some minor changes and if customer is facing some minor defects then customer 
+will communicate to company, In the company we will select some set of developers and test
+engineers where in developers will write the code for minor changes and fix the minor 
+defects and give sw to Test engineers and test engineers will test the minor 
+changes (FT,IT,ST) and test the minor defects and give sw to customer and 
+customer will do Acceptance testing and deploy the sw into production server .
+This entire process will be done just within 15 days or 1 month instead of taking an
+year time.These kind of releases are called Short release or Interim Release.
+
+Difference between Service based company & Product based company:
+Service Based Company:
+--------------------------------
+1. Customer gives the requirement
+2. BA will be present in service based company and he will do requirement collection
+3. company will develop the software, test the software and give it back to the customer 
+   who gave requirement
+4. company don't have any rights to sell same software to other customer
+5. company don't have any rights or authority to keep source code with them.
+6. customer & projects are terms used in service based company.
+ex: Infosys, Accenture, Wipro etc.,
+
+Product Based Company:
+1. Initially Customer will not be present.
+2. PA (Product Analyst) will do market research and he will collect requirement.
+3. company will develop the software, test the software and sell the software to multiple
+    customer. 
+4. company has got all the rights to sell same software to different customer
+5. company has got all the rights or authority to keep source code with them.
+6. client & product are terms used in product based company.
+ex: FlipKart,Amazon, Apple,Sony,Benz, Volvo, Nokia,Samsung, Dell, Microsoft
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
